@@ -19,4 +19,5 @@
     <string name="rowne">=</string>
     <string name="dzielenie">/</string>
     <string name="clear">C</string>
+    <string name="divByZeroError">Nie dziel przez zero</string>
 </resources>

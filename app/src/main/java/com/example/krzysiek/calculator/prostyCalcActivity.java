@@ -13,12 +13,9 @@ import com.example.krzysiek.calculator.databinding.ActivityProstyCalcBinding;
 import java.text.DecimalFormat;
 
 public class prostyCalcActivity extends AppCompatActivity {
-    private ActivityProstyCalcBinding binding;
 
-    private static final char ADDITION = '+';
-    private static final char SUBTRACTION = '-';
-    private static final char MULTIPLICATION = '*';
-    private static final char DIVISION = '/';
+    public float var1,var2;
+    public boolean addVar,subVar,divVar,mulVar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +33,14 @@ public class prostyCalcActivity extends AppCompatActivity {
         Button button7 =  findViewById(R.id.button7);
         Button button8 =  findViewById(R.id.button8);
         Button button9 =  findViewById(R.id.button9);
+        Button buttonPlus =  findViewById(R.id.buttonPlus);
+        Button buttonMinus =  findViewById(R.id.buttonMinus);
+        Button buttonDzielenie =  findViewById(R.id.buttonDzielenie);
+        Button buttonMnozenie =  findViewById(R.id.buttonMnozenie);
+        Button buttonRowne =  findViewById(R.id.buttonRowne);
         final EditText editText = findViewById(R.id.editText2);
 
-        float var1,var2;
-        boolean addVar,subVar,divVar,mulVar;
+
 
         button0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,5 +103,98 @@ public class prostyCalcActivity extends AppCompatActivity {
                 editText.setText(editText.getText() + "9");
             }
         });
+
+        buttonPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (editText == null){
+                    editText.setText("");
+                }else {
+                    var1 = Float.parseFloat(editText.getText() + "");
+                    addVar = true;
+                    editText.setText(null);
+                }
+            }
+        });
+
+        buttonMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (editText == null){
+                    editText.setText("");
+                }else {
+                    var1 = Float.parseFloat(editText.getText() + "");
+                    subVar = true;
+                    editText.setText(null);
+                }
+            }
+        });
+        buttonDzielenie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (editText == null){
+                    editText.setText("");
+                }else {
+                    var1 = Float.parseFloat(editText.getText() + "");
+                    divVar = true;
+                    editText.setText(null);
+                }
+            }
+        });
+        buttonMnozenie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (editText == null){
+                    editText.setText("");
+                }else {
+                    var1 = Float.parseFloat(editText.getText() + "");
+                    mulVar = true;
+                    editText.setText(null);
+                }
+            }
+        });
+
+        buttonRowne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                var2 = Float.parseFloat(editText.getText() + "");
+
+                if (addVar){
+
+                    editText.setText(var1 + var2 +"");
+                    addVar=false;
+                }
+
+
+                if (subVar){
+
+                    editText.setText(var1 - var2 +"");
+                    subVar=false;
+                }
+
+                if (mulVar){
+
+                    editText.setText(var1 * var2 +"");
+                    mulVar=false;
+                }
+
+                if (divVar){
+                    if(var2==0){
+                        editText.setText(R.string.divByZeroError);
+                        divVar = false;
+                    }else {
+                        editText.setText(var1 / var2 + "");
+                        divVar = false;
+                    }
+                }
+            }
+        });
+
+
+
     }
 }
