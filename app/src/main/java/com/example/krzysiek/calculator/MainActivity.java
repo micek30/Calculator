@@ -16,8 +16,10 @@ public class MainActivity extends AppCompatActivity {
     public void prostyCalc(View view) {
         Intent startNewActivity = new Intent(this, prostyCalcActivity.class);
         startActivity(startNewActivity);
+    }
 
-
-
+    public void rozszerzonyCalc(View view) {
+        Intent startNewActivity = new Intent(this, rozszerzonyCalcActivity.class);
+        startActivity(startNewActivity);
     }
 }

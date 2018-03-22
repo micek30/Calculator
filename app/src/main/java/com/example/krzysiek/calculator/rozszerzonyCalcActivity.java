@@ -12,16 +12,19 @@ import com.example.krzysiek.calculator.databinding.ActivityProstyCalcBinding;
 
 import java.text.DecimalFormat;
 
-public class prostyCalcActivity extends AppCompatActivity {
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
+public class rozszerzonyCalcActivity extends AppCompatActivity {
 
     public float var1,var2;
-    public boolean addVar,subVar,divVar,mulVar;
+    public boolean addVar,subVar,divVar,mulVar,powVar,sqrtVar,silniaVar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_prosty_calc);
+        setContentView(R.layout.activity_rozszerzony_calc);
 
         Button button0 =  findViewById(R.id.button0);
         Button button1 =  findViewById(R.id.button1);
@@ -40,6 +43,9 @@ public class prostyCalcActivity extends AppCompatActivity {
         Button buttonRowne =  findViewById(R.id.buttonRowne);
         Button buttonC =  findViewById(R.id.buttonC);
         Button buttonDot =  findViewById(R.id.buttonDot);
+        Button buttonPow =  findViewById(R.id.buttonPow);
+        Button buttonSQRT =  findViewById(R.id.buttonSqrt);
+        Button buttonSilnia =  findViewById(R.id.buttonSilnia);
         final EditText editText = findViewById(R.id.editText2);
 
 
@@ -114,7 +120,7 @@ public class prostyCalcActivity extends AppCompatActivity {
         buttonC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editText.setText("0");
+                editText.setText(null);
                 var1=0;
                 var2=0;
             }
@@ -174,11 +180,52 @@ public class prostyCalcActivity extends AppCompatActivity {
                 }
             }
         });
+        buttonPow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (editText == null){
+                    editText.setText("");
+                }else {
+                    var1 = Float.parseFloat(editText.getText() + "");
+                    powVar = true;
+                    editText.setText(null);
+                }
+            }
+        });
+        buttonSQRT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (editText == null){
+                    editText.setText("");
+                }else {
+                    var1 = Float.parseFloat(editText.getText() + "");
+                    editText.setText(sqrt(var1) +"");
+                }
+            }
+        });
+        buttonSilnia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (editText == null){
+                    editText.setText("");
+                }else {
+                    var1 = Float.parseFloat(editText.getText() + "");
+                    int wynik=1;
+                    for(int i=Math.round(var1);i>1;i--){
+                        wynik*= i;
+                    }
+                    editText.setText(wynik +"");
+                }
+            }
+        });
 
         buttonRowne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                var2 = Float.parseFloat(editText.getText() + "");
+                    var2 = Float.parseFloat(editText.getText() + "");
 
                 if (addVar){
 
@@ -198,6 +245,11 @@ public class prostyCalcActivity extends AppCompatActivity {
                     editText.setText(var1 * var2 +"");
                     mulVar=false;
                 }
+                if (powVar){
+
+                    editText.setText(pow(var1,var2) +"");
+                    powVar=false;
+                }
 
                 if (divVar){
                     if(var2==0){
@@ -208,6 +260,8 @@ public class prostyCalcActivity extends AppCompatActivity {
                         divVar = false;
                     }
                 }
+                var1=0;
+                var2=0;
             }
         });
 
